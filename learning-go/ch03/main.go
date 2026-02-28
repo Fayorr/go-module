@@ -51,3 +51,4 @@ func exercise3() {
 func main() {
 	exercise3()
 }
+// redo the notification button compoent so i can use as a feature in dashboard tabs. I want the number of fetched data be shown at the top of the tabs just like number 4 on the notification button component

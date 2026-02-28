@@ -44,18 +44,21 @@ func CorrectCase(sentence string) string {
 			if err == nil {
 				for j := 1; j <= num; j++ {
 					if i-j >= 0 {
-						if senArray[i] == "(low," {
+						switch senArray[i] {
+						case "(low,":
 							senArray[i-j] = strings.ToLower(senArray[i-j])
-						} else if senArray[i] == "(up," {
+						case "(up,":
 							senArray[i-j] = strings.ToUpper(senArray[i-j])
-						} else if senArray[i] == "(cap," {
+						case "(cap,":
 							wordSlice := []byte(senArray[i-j])
 							wordSlice[0] = byte(unicode.ToUpper(rune(wordSlice[0])))
 							senArray[i-j] = string(wordSlice)
 						}
+
 					}
 				}
 			}
+
 			senArray = append(senArray[:i], senArray[i+2:]...)
 			i--
 		}
