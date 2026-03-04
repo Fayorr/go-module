@@ -40,8 +40,12 @@ func main() {
 
 	word := strings.Join(arguments, " ")
 	wordSlice := strings.Split(word, "\\n")
+
 	fmt.Println(wordSlice)
 	for j := 0; j < len(wordSlice); j++ {
+		if wordSlice[j] == "" {
+			continue
+		}
 		for i := 1; i <= 8; i++ {
 			for _, ch := range wordSlice[j] {
 				pos := (int(ch-' ') * 9)
