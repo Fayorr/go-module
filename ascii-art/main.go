@@ -35,24 +35,24 @@ func main() {
 	}
 
 	result, _ := readFile()
+	
+	
+	lines := strings.Split(result, "\n")
 
-	trimmedResult := strings.Split(result, "\n")
 
-	word := strings.Join(arguments, " ")
-	wordSlice := strings.Split(word, "\\n")
+	wordSlice := strings.Split(arguments[0], "\\n")
 
-	fmt.Println(wordSlice)
-	for j := 0; j < len(wordSlice); j++ {
+	for j:= 0; j<len(wordSlice); j++ {
 		if wordSlice[j] == "" {
+			fmt.Println()
 			continue
 		}
-		for i := 1; i <= 8; i++ {
+		for i:=1; i <= 8; i++ {
 			for _, ch := range wordSlice[j] {
-				pos := (int(ch-' ') * 9)
-				fmt.Print(trimmedResult[pos+i])
+				pos := (int(ch - ' ')) * 9
+				fmt.Print(lines[pos+i])
 			}
 			fmt.Println()
 		}
 	}
-
 }
