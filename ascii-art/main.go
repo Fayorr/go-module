@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 )
 
 func validator(arguments []string) bool {
@@ -34,25 +33,10 @@ func main() {
 		return
 	}
 
-	result, _ := readFile()
+	content, _ := readFile()
 
-	trimmedResult := strings.Split(result, "\n")
+	result := Runner(content, arguments)
 
-	word := strings.Join(arguments, " ")
-	wordSlice := strings.Split(word, "\\n")
-
-	fmt.Println(wordSlice)
-	for j := 0; j < len(wordSlice); j++ {
-		if wordSlice[j] == "" {
-			continue
-		}
-		for i := 1; i <= 8; i++ {
-			for _, ch := range wordSlice[j] {
-				pos := (int(ch-' ') * 9)
-				fmt.Print(trimmedResult[pos+i])
-			}
-			fmt.Println()
-		}
-	}
+	fmt.Print(result)
 
 }
