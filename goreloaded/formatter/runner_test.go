@@ -7,25 +7,29 @@ func TestRunAll(t *testing.T) {
 	tests := []struct {
 		name     string
 		input    string
-		expected string 
+		expected string
 	}{
 		{
-			name:     "Harold Wilson Quote (The Final Boss)",
+			name:     "Audit 1",
+			input:    "If I make you BREAKFAST IN BED (low, 3) just say thank you instead of: how (cap) did you get in my house (up, 2) ?",
+			expected: "If I make you breakfast in bed just say thank you instead of: How did you get in MY HOUSE?",
+		},
+		{
+			name:     "Audit 2",
+			input:    "I have to pack 101 (bin) outfits. Packed 1a (hex) just to be sure",
+			expected: "I have to pack 5 outfits. Packed 26 just to be sure",
+		},
+		{
+			name:     "Audit 3",
+			input:    "Don not be sad ,because sad backwards is das . And das not good",
+			expected: "Don not be sad, because sad backwards is das. And das not good",
+		},
+		{
+			name:     "Audit 4",
 			input:    "harold wilson (cap, 2) : ' I am a optimist ,but a optimist who carries a raincoat . '",
 			expected: "Harold Wilson: 'I am an optimist, but an optimist who carries a raincoat.'",
 		},
-		{
-			name:     "Basic Hex and Bin",
-			input:    "1E (hex) files and 10 (bin) years",
-			expected: "30 files and 2 years",
-		},
-		{
-			name:     "Punctuation Spacing",
-			input:    "I was sitting over there ,and then BAMM !!",
-			expected: "I was sitting over there, and then BAMM!!",
-		},
 	}
-
 	// Loop through every test case in the table
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
