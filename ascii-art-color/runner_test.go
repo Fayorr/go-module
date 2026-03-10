@@ -3,30 +3,70 @@ package main
 import (
 	"testing"
 )
-
+// 2nOs3HqZd5
 func TestRun(t *testing.T) {
 	tests := []struct {
-		name     string
-		expected string
-		result   string
+		name      string
+		flag      string
+		subString string
+		sentence  string
+		expected  string
 	}{
 		{
-			name:     "hello world",
-			expected: `--color=red "hello world"`,
-			result: ``,
+			name:      "Audit 1: Color everything red",
+			flag:      "--color=red",
+			subString: "",
+			sentence:  "hello world",
+			expected:  "", // Replace with actual output or Golden File
 		},
 		{
-			name: "{Hello & There #}",
-			expected: "--color=red {Hello & There #}"
-			result: `   __  _    _          _   _                                _______   _                                    _  _    __    
-  / / | |  | |        | | | |                 ___          |__   __| | |                                 _| || |_  \ \   
- | |  | |__| |   ___  | | | |   ___          ( _ )            | |    | |__     ___   _ __    ___        |_  __  _|  | |  
-/ /   |  __  |  / _ \ | | | |  / _ \         / _ \/\          | |    |  _ \   / _ \ | '__|  / _ \        _| || |_    \ \ 
-\ \   | |  | | |  __/ | | | | | (_) |       | (_>  <          | |    | | | | |  __/ | |    |  __/       |_  __  _|   / / 
- | |  |_|  |_|  \___| |_| |_|  \___/         \___/\/          |_|    |_| |_|  \___| |_|     \___|         |_||_|    | |  
-  \_\                                                                                                              /_/   
-                                                                                                                         
-`,
+			name:      "Audit 2: Color everything green",
+			flag:      "--color=green",
+			subString: "",
+			sentence:  "1 + 1 = 2",
+			expected:  "",
+		},
+		{
+			name:      "Audit 3: Color everything yellow",
+			flag:      "--color=yellow",
+			subString: "",
+			sentence:  "(%&) ??",
+			expected:  "",
+		},
+		{
+			name:      "Audit 4: Color second until the last letter",
+			flag:      "--color=cyan", // The audit didn't specify a color, so we use cyan
+			subString: "ello",
+			sentence:  "hello",
+			expected:  "",
+		},
+		{
+			name:      "Audit 5: Color the second letter",
+			flag:      "--color=magenta", // Using magenta as a placeholder
+			subString: "e",
+			sentence:  "hello",
+			expected:  "",
+		},
+		{
+			name:      "Audit 6: Color just two letters",
+			flag:      "--color=white", // Using white as a placeholder
+			subString: "ll",
+			sentence:  "hello",
+			expected:  "",
+		},
+		{
+			name:      "Audit 7: Color specific word with different casing",
+			flag:      "--color=orange",
+			subString: "GuYs",
+			sentence:  "HeY GuYs",
+			expected:  "",
+		},
+		{
+			name:      "Audit 8: Color single uppercase letter in symbols",
+			flag:      "--color=blue",
+			subString: "B",
+			sentence:  "RGB()",
+			expected:  "",
 		},
 	}
 
