@@ -17,7 +17,8 @@ func validator(arguments []string) bool {
 	return true
 }
 func readFile() (string, error) {
-	content, err := os.ReadFile("standard.txt")
+	//change the banner file name here
+	content, err := os.ReadFile("./banner/shadow.txt")
 
 	if err != nil {
 		fmt.Println("Error in reading file")
