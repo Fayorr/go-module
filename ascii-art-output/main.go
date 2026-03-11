@@ -7,26 +7,18 @@ import (
 )
 
 func validator(arguments []string) bool {
-
+	// expect exactly three arguments: output flag, sentence, banner name
 	if len(arguments) != 3 {
-		return false
-	}
-	if arguments[0] != "" && strings.HasSuffix(arguments[0], ".txt"){
+		fmt.Println("need 3 arguments")
 		return false
 	}
 
+	flag := arguments[0]
+	if !strings.HasPrefix(flag, "--output=") {
+		fmt.Println("needs the appropraite prefix")
+		return false
+	}
 	return true
-}
-func readFile() (string, error) {
-	//change the banner file name here
-	content, err := os.ReadFile("./banner/shadow.txt")
-
-	if err != nil {
-		fmt.Println("Error in reading file")
-		return "", err
-	}
-
-	return string(content), nil
 }
 func main() {
 	arguments := os.Args[1:]
@@ -38,7 +30,14 @@ func main() {
 	flag := arguments[0]
 	sentence := arguments[1]
 	banner := arguments[2]
+	fileName := strings.TrimPrefix(flag, "--output=")
 
-	result := Runner(flag, sentence, banner)
-	fmt.Print(result)
+	result := Runner(sentence, banner)
+
+	resultBytes := []byte(result)
+	err := os.WriteFile(fileName, resultBytes, 0644)
+	if err != nil {
+		fmt.Println("error writing to file")
+		os.Exit(1)
+	}
 }

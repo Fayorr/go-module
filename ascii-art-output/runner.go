@@ -6,30 +6,30 @@ import (
 	"strings"
 )
 
-func Runner(flag, sentence, banner string) string {
+func Runner(sentence, banner string) string {
 
 	var bannerFile string 
 
 	if banner == "shadow" {
-		bannerFile = "shadow.txt"
+		bannerFile = "./banner/shadow.txt"
 	} else if banner == "thinkertoy" {
-		bannerFile = "thinkertoy.txt"
+		bannerFile = "./banner/thinkertoy.txt"
 	} else if banner == "standard" {
-		bannerFile = "standard.txt"
+		bannerFile = "./banner/standard.txt"
 	} else {
 		return ""
 	}
-	}
 	
-	result, err := os.ReadFile(bannerFile)
-	fileName := strings.TrimPrefix(flag, "--output=")
 
+
+	result, err := os.ReadFile(bannerFile)
 
 	if err != nil {
-		fmt.Errorf("Error reading file: %s", err)
+		fmt.Printf("Error reading file: %s", err)
+		os.Exit(1)
 	}
 
-	trimmedResult := strings.Split(result, "\n")
+	trimmedResult := strings.Split(string(result), "\n")
 
 	wordSlice := strings.Split(sentence, "\\n")
 
