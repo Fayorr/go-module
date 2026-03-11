@@ -21,13 +21,13 @@ func Runner(flag, sentence, banner string) string {
 	}
 	}
 	
-	result, err := os.ReadFile(fileName)
+	result, err := os.ReadFile(bannerFile)
 	fileName := strings.TrimPrefix(flag, "--output=")
 
 
-	// if err != nil {
-	// 	fmt.Errorf("Error reading file: %s", err)
-	// }
+	if err != nil {
+		fmt.Errorf("Error reading file: %s", err)
+	}
 
 	trimmedResult := strings.Split(result, "\n")
 
