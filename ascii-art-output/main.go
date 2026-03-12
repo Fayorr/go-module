@@ -7,7 +7,7 @@ import (
 )
 
 func validator(arguments []string) bool {
-	// expect exactly three arguments: output flag, sentence, banner name
+	// Check for exactly 3 arguments
 	if len(arguments) != 3 {
 		fmt.Println("need 3 arguments")
 		return false
@@ -30,10 +30,17 @@ func main() {
 	flag := arguments[0]
 	sentence := arguments[1]
 	banner := arguments[2]
+
+	// Parse the output filename from the --output= flag
 	fileName := strings.TrimPrefix(flag, "--output=")
+
+	// Convert escaped newlines (\\n) to actual newlines for multi-line input
 	finalSen := strings.ReplaceAll(sentence, "\\n", "\n")
+
+	// Generate ASCII art using the Runner function
 	result := Runner(finalSen, banner)
 
+	// Convert string result to bytes and write to output file
 	resultBytes := []byte(result)
 	err := os.WriteFile(fileName, resultBytes, 0644)
 	if err != nil {

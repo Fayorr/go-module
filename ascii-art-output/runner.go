@@ -20,7 +20,7 @@ func Runner(sentence, banner string) string {
 		bannerFile = ""
 	}
 
-
+	// Read the banner file containing ASCII art character definitions
 	result, err := os.ReadFile(bannerFile)
 
 	if err != nil {
