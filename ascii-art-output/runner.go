@@ -9,17 +9,16 @@ import (
 func Runner(sentence, banner string) string {
 
 	var bannerFile string 
-
-	if banner == "shadow" {
+	switch banner {
+	case "shadow":
 		bannerFile = "./banner/shadow.txt"
-	} else if banner == "thinkertoy" {
+	case "thinkertoy":
 		bannerFile = "./banner/thinkertoy.txt"
-	} else if banner == "standard" {
+	case "standard":
 		bannerFile = "./banner/standard.txt"
-	} else {
-		return ""
+	default:
+		bannerFile = ""
 	}
-	
 
 
 	result, err := os.ReadFile(bannerFile)
@@ -31,7 +30,7 @@ func Runner(sentence, banner string) string {
 
 	trimmedResult := strings.Split(string(result), "\n")
 
-	wordSlice := strings.Split(sentence, "\\n")
+	wordSlice := strings.Split(sentence, "\n")
 
 	var finalString strings.Builder
 	for j := 0; j < len(wordSlice); j++ {

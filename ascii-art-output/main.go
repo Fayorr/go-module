@@ -31,8 +31,8 @@ func main() {
 	sentence := arguments[1]
 	banner := arguments[2]
 	fileName := strings.TrimPrefix(flag, "--output=")
-
-	result := Runner(sentence, banner)
+	finalSen := strings.ReplaceAll(sentence, "\\n", "\n")
+	result := Runner(finalSen, banner)
 
 	resultBytes := []byte(result)
 	err := os.WriteFile(fileName, resultBytes, 0644)
