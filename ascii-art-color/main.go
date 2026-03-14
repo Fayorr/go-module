@@ -8,11 +8,15 @@ import (
 func validator(arguments []string) bool {
 
 	if len(arguments) < 1 || len(arguments) > 3 {
+		fmt.Println(`Usage: go run . [OPTION] [STRING]`)
+		fmt.Println()
+		fmt.Println(`EX: go run . --color=<color> <substring to be colored> "something"`)
 		return false
 	}
 	if arguments[0] == "" {
 		return false
 	}
+	if 
 
 	return true
 }

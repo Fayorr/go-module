@@ -17,7 +17,7 @@ func Runner(sentence, banner string) string {
 	case "standard":
 		bannerFile = "./banner/standard.txt"
 	default:
-		bannerFile = ""
+		bannerFile = "./banner/standard.txt"
 	}
 
 	// Read the banner file containing ASCII art character definitions
@@ -28,8 +28,8 @@ func Runner(sentence, banner string) string {
 		os.Exit(1)
 	}
 
+	// Split content by newlines
 	trimmedResult := strings.Split(string(result), "\n")
-
 	wordSlice := strings.Split(sentence, "\\n")
 
 	var finalString strings.Builder
@@ -47,5 +47,5 @@ func Runner(sentence, banner string) string {
 			finalString.WriteRune('\n')
 		}
 	}
-	return finalString.String()
+	return strings.TrimRight(finalString.String(), "\n")
 }
