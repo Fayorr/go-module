@@ -6,7 +6,7 @@ import (
 )
 
 func validator(arguments []string) bool {
-	// Check for exactly 3 arguments
+	// Check for 1 or 2 arguments
 	if len(arguments) > 2 || len(arguments) < 1 {
 		fmt.Println("Usage: go run . [STRING] [BANNER]\n\nEX: go run . something standard")
 		return false
@@ -14,9 +14,11 @@ func validator(arguments []string) bool {
 	if arguments[0] == "" {
 		return false
 	}
-	if !(arguments[1] == "shadow" || arguments[1] == "thinkertoy" || arguments[1] == "standard") {
-		fmt.Println("Usage: go run . [STRING] [BANNER]\n\nEX: go run . something standard")
-		return false
+	if len(arguments) == 2 {
+		if !(arguments[1] == "shadow" || arguments[1] == "thinkertoy" || arguments[1] == "standard") {
+			fmt.Println("Usage: go run . [STRING] [BANNER]\n\nEX: go run . something standard")
+			return false
+		}
 	}
 	return true
 }
