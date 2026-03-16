@@ -42,6 +42,7 @@ func main() {
 
 	// Generate ASCII art using the Runner function
 	result := Runner(sentence, banner)
+	
 
 	fmt.Println(result)
 }
