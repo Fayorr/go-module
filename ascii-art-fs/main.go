@@ -12,6 +12,7 @@ func validator(arguments []string) bool {
 		return false
 	}
 	if arguments[0] == "" {
+		fmt.Println("Usage: go run . [STRING] [BANNER]\n\nEX: go run . something standard")
 		return false
 	}
 	if len(arguments) == 2 {
@@ -42,7 +43,6 @@ func main() {
 
 	// Generate ASCII art using the Runner function
 	result := Runner(sentence, banner)
-	
 
 	fmt.Println(result)
 }

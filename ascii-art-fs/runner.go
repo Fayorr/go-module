@@ -30,6 +30,7 @@ func Runner(sentence, banner string) string {
 
 	// Split content by newlines
 	trimmedResult := strings.Split(string(result), "\n")
+	// break sentence into individual words to loop over
 	wordSlice := strings.Split(sentence, "\\n")
 
 	var finalString strings.Builder
@@ -38,12 +39,18 @@ func Runner(sentence, banner string) string {
 			finalString.WriteRune('\n')
 			continue
 		}
-
+		// rows 1 - 8
 		for i := 1; i <= 8; i++ {
+			
+
+
 			for _, ch := range wordSlice[j] {
+				//starting position of the character in the banner file
 				pos := (int(ch-' ') * 9)
 				finalString.WriteString(trimmedResult[pos+i])
 			}
+
+			
 			finalString.WriteRune('\n')
 		}
 	}
