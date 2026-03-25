@@ -16,7 +16,7 @@ func TestAll(t *testing.T) {
 	}{
 		{
 			name:     "Audit1",
-			sentence: "hello",
+			sentence: "hell",
 			banner:   "standard",
 			expected: "./test-files/audit1.txt",
 		},
@@ -76,6 +76,7 @@ func TestAll(t *testing.T) {
 		if err != nil {
 			fmt.Println("couldnt read file for tests")
 		}
+		// actual test runs here
 		t.Run(tt.name, func(t *testing.T) {
 			got := Runner(tt.sentence, tt.banner)
 			if got != expected {
