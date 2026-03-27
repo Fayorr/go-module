@@ -30,5 +30,16 @@ func displayArt(w http.ResponseWriter, r *http.Request) {
 	log.Print(banner)
 	result := Runner(sentence, banner)
 
-	w.Write([]byte(result))
+	tmpl, err := template.ParseFiles("./templates/ascii.html")
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+	data := struct {
+		Result string
+	}{
+		Result: result,
+	}
+	 
+	tmpl.Execute(w, data)
 }
