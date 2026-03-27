@@ -17,7 +17,7 @@ func Runner(sentence, banner string) string {
 	case "standard":
 		bannerFile = "banner/standard.txt"
 	default:
-		bannerFile = ""
+		bannerFile = "banner/standard.txt"
 	}
 
 	// Read the banner file containing ASCII art character definitions
