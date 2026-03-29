@@ -30,7 +30,7 @@ func Runner(sentence, banner string) string {
 
 	trimmedResult := strings.Split(string(result), "\n")
 
-	wordSlice := strings.Split(sentence, "\\n")
+	wordSlice := strings.Split(sentence, "\r\n")
 
 	var finalString strings.Builder
 	for j := 0; j < len(wordSlice); j++ {
@@ -39,7 +39,7 @@ func Runner(sentence, banner string) string {
 			continue
 		}
 
-		for i := 0; i < 8; i++ {
+		for i := 1; i <= 8; i++ {
 			for _, ch := range wordSlice[j] {
 				pos := (int(ch-' ') * 9)
 				finalString.WriteString(trimmedResult[pos+i])
