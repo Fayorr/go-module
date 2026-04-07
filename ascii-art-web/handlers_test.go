@@ -17,21 +17,28 @@ func TestHandler(t *testing.T) {
 		expectedStatus int    // E.g., 200, 400, or 404
 	}{
 		{
-			name:           "Bad Input",
+			name:           "Bad Input - 400",
 			method:         "POST",
 			path:           "/ascii-art",
 			formData:       "textInput=😍&bannerType=standard",
 			expectedStatus: http.StatusBadRequest,
 		},
 		{
-			name:           "Valid Request",
+			name:           "Valid Request - 200",
 			method:         "GET",
 			path:           "/",
 			formData:       "",
 			expectedStatus: http.StatusOK,
 		},
 		{
-			name:           "Valid Request",
+			name:           "Not Found - 404",
+			method:         "GET",
+			path:           "/random-page",
+			formData:       "",
+			expectedStatus: http.StatusNotFound,
+		},
+		{
+			name:           "Not Request - 405",
 			method:         "GET",
 			path:           "/ascii-art",
 			formData:       "",
@@ -45,18 +52,21 @@ func TestHandler(t *testing.T) {
 
 	for _, tt := range tests {
 
-		rr := httptest.NewRecorder()
+		t.Run(tt.name, func(t *testing.T) {
+			rr := httptest.NewRecorder()
 
-		r, err := http.NewRequest(tt.method, tt.path, strings.NewReader(tt.formData))
-		r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+			r, err := http.NewRequest(tt.method, tt.path, strings.NewReader(tt.formData))
+			r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-		if err != nil {
-			t.Fatal(err)
-		}
-		mux.ServeHTTP(rr, r)
+			if err != nil {
+				t.Fatal(err)
+			}
+			mux.ServeHTTP(rr, r)
 
-		if rr.Code != tt.expectedStatus {
-			t.Errorf("For %s, expected %d but got %d", tt.name, tt.expectedStatus, rr.Code)
-		}
+			if rr.Code != tt.expectedStatus {
+				t.Errorf("For %s, expected %d but got %d", tt.name, tt.expectedStatus, rr.Code)
+			}
+		})
 	}
+
 }
