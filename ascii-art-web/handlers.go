@@ -25,7 +25,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+<<<<<<< HEAD
 func DisplayArt(w http.ResponseWriter, r *http.Request) {
+=======
+func displayArt(w http.ResponseWriter, r *http.Request) {
+>>>>>>> febea0e9341ccda6909cafc03d735f9b7382979f
 
 	sentence := r.FormValue("textInput")
 	banner := r.FormValue("bannerType")
@@ -36,12 +40,23 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+<<<<<<< HEAD
 	// 2. Validationm of the banner type
 	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" || banner == "" {
 		http.Error(w, "400 Bad Request - Invalid Banner", http.StatusBadRequest)
 		return
 	}
 
+=======
+	// http.Error(w,http.StatusText(http.StatusNotFound))
+
+	// 2. Validationm of the banner type
+	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" || banner == "" {
+		http.Error(w, "400 Bad Request - Invalid Banner", http.StatusBadRequest)
+		return
+	}
+
+>>>>>>> febea0e9341ccda6909cafc03d735f9b7382979f
 	// 3. Loop through every individual character in the sentence
 	for _, char := range sentence {
 		// If the character is NOT a newline (10) AND NOT a carriage return (13)
