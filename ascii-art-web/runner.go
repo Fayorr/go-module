@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 )
 
-func Runner(sentence, banner string) string {
+func Runner(sentence, banner string) (string, error) {
 
 	var bannerFile string
 	switch banner {
@@ -24,8 +23,7 @@ func Runner(sentence, banner string) string {
 	result, err := os.ReadFile(bannerFile)
 
 	if err != nil {
-		fmt.Printf("Error reading file: %s", err)
-		os.Exit(1)
+		return "", err
 	}
 
 	trimmedResult := strings.Split(string(result), "\n")
@@ -47,5 +45,5 @@ func Runner(sentence, banner string) string {
 			finalString.WriteRune('\n')
 		}
 	}
-	return finalString.String()
+	return finalString.String(), nil
 }
