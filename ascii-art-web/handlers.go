@@ -22,6 +22,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 		http.NotFound(w, r)
+		return
 	}
 }
 
@@ -29,7 +30,7 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 
 	sentence := r.FormValue("textInput")
 	banner := r.FormValue("bannerType")
-	// fmt.Printf("Raw received string: %q\n", sentence)
+
 	// 1. Check for missing data
 	if sentence == "" {
 		http.Error(w, "400 Bad Request - Invalid Input", http.StatusBadRequest)

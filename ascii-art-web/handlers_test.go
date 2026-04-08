@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 )
@@ -68,5 +69,24 @@ func TestHandler(t *testing.T) {
 			}
 		})
 	}
+	// Tests on Internal Server Error - 500
+
+	t.Run("Internal Server Error", func(t *testing.T) {
+		err := os.Rename("./templates", "./templates-renamed")
+		if err != nil {
+			t.Fatal("Could not rename folder for test")
+		}
+		defer os.Rename("./templates-renamed", "./templates")
+
+		rr := httptest.NewRecorder()
+		r, _ := http.NewRequest("POST", "/ascii-art", strings.NewReader("textInput=Hello&bannerType=standard"))
+		r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+		mux.ServeHTTP(rr, r)
+
+		if rr.Code != http.StatusInternalServerError {
+			t.Errorf("Expected %d but got %d", http.StatusInternalServerError, rr.Code)
+		}
+	})
 
 }
