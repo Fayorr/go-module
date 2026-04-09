@@ -52,7 +52,7 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	log.Print(banner)
+	log.Print(banner) // log banner selected
 	result, err := Runner(sentence, banner)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

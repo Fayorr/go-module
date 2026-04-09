@@ -39,7 +39,7 @@ func TestHandler(t *testing.T) {
 			expectedStatus: http.StatusNotFound,
 		},
 		{
-			name:           "Not Request - 405",
+			name:           "Wrong Request - 405",
 			method:         "GET",
 			path:           "/ascii-art",
 			formData:       "",
@@ -69,7 +69,7 @@ func TestHandler(t *testing.T) {
 			}
 		})
 	}
-	
+
 	// Tests on Internal Server Error - 500
 
 	t.Run("Internal Server Error", func(t *testing.T) {
