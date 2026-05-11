@@ -6,9 +6,13 @@ RUN go mod download
 COPY . .
 
 FROM base AS builder
-RUN go build -o /app/dockerize ./
+RUN CGO_ENABLED=0 go build -o /app/dockerize ./
 
 FROM scratch
 WORKDIR /app
 COPY --from=builder /app/dockerize .
-COPY --from=builder 
+COPY --from=builder /app/banner ./banner
+COPY --from=builder /app/templates ./templates
+
+
+ENTRYPOINT [ "./dockerize" ]
