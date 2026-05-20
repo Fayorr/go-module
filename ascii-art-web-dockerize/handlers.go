@@ -10,6 +10,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	files := []string{
 		"./templates/index.html",
+		"./templates/ascii.css",
 	}
 
 	ts, err := template.ParseFiles(files...)
@@ -60,7 +61,12 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("./templates/ascii.html")
+	files := []string{
+		"./templates/ascii.html",
+		"./templates/ascii.css",
+	}
+
+	tmpl, err := template.ParseFiles(files...)
 
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -73,5 +79,5 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 		Result: result,
 	}
 
-	tmpl.Execute(w, data)
+	tmpl.ExecuteTemplate(w, "ascii", data)
 }

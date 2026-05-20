@@ -1,0 +1,118 @@
+/* ascii.css */
+:root {
+	--bg-color: #f8fafc;
+	--card-bg: #ffffff;
+	--primary-color: #4f46e5;
+	--primary-hover: #4338ca;
+	--text-main: #1e293b;
+	--ascii-bg: #1e1e1e; /* Dark background for the terminal look */
+	--ascii-color: #4ade80; /* Hacker green text */
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--bg-color);
+	font-family:
+		'Segoe UI',
+		system-ui,
+		-apple-system,
+		sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	padding: 2rem 1rem;
+}
+
+.container {
+	background-color: var(--card-bg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 1000px; /* Allows wide ascii art more room */
+	border-radius: 16px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+	padding: 2.5rem;
+	gap: 2rem;
+}
+
+h1 {
+	font-size: 2.5rem;
+	color: var(--text-main);
+	text-align: center;
+}
+
+pre {
+	background-color: var(--ascii-bg);
+	color: var(--ascii-color);
+	border-radius: 8px;
+	padding: 1.5rem;
+	width: 100%;
+	overflow-x: auto; /* Ensures wide art doesn't break the layout */
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 14px;
+	line-height: 1.2;
+	box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+a {
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+}
+
+button {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 0.875rem 2.5rem;
+	border: none;
+	border-radius: 8px;
+	font-size: 1.1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+button:hover {
+	background-color: var(--primary-hover);
+}
+
+button:active {
+	transform: scale(0.97);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+	h1 {
+		font-size: 2rem;
+	}
+
+	.container {
+		padding: 1.5rem;
+	}
+
+	pre {
+		font-size: 12px;
+		padding: 1rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	h1 {
+		font-size: 1.5rem;
+	}
+
+	pre {
+		font-size: 10px; /* Scale down art on very small screens to fit more */
+	}
+
+	button {
+		width: 100%;
+	}
+}
