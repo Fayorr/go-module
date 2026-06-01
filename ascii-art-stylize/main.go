@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 )
 
 func main() {
-
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("POST /ascii-art", displayArt)
-	fmt.Println("Starting Go Server at PORT:3000")
-	err := http.ListenAndServe(":3000", mux)
-	log.Fatal(err)
+	mux.HandleFunc("GET /{$}", Home)
+	mux.HandleFunc("POST /ascii-art", DisplayArt)
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./templates/"))))
+	log.Println("Starting Go server at port http://localhost:4000")
+	err := http.ListenAndServe(":4000", mux)
+	log.Fatal(err.Error())
 }

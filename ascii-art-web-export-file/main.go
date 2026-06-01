@@ -12,6 +12,7 @@ func main() {
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("POST /ascii-art", displayArt)
 	mux.HandleFunc("POST /download", downloadArt)
+	mux.Handle("/static", http.StripPrefix("/static/", http.FileServer(http.Dir("./templates"))))
 	fmt.Println("Starting Go Server at PORT:3000")
 	err := http.ListenAndServe(":3000", mux)
 	log.Fatal(err)

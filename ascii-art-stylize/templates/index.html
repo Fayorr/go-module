@@ -7,23 +7,35 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
+		<link rel="stylesheet" href="/static/index.css">
 		<title>Home: Ascii-Art-Web</title>
 	</head>
 	<body>
-		<h1>Welcome to Ascii Art Web</h1>
+		<div class="Home">
+			<h1>ascii art generator</h1>
+		</div>
         <br />
         <br />
 		<form action="/ascii-art" method="post">
-			<label for="textInput">Input</label>
-			<textarea name="textInput" id="textInput"></textarea><br>
-			<input type="radio" name="bannerType" value="standard">
-			<label for="standard">Standard</label><br>
-			<input type="radio" name="bannerType" value="shadow">
-			<label for="shadow">Shadow</label><br>
-			<input type="radio" name="bannerType" value="thinkertoy">
-			<label for="thinkertoy">Thinkertoy</label><br>
+			<div class="Text">
+				<div class="Input">
+					<label for="textInput">Input your text here: </label>
+				</div>
+				<textarea name="textInput" id="textInput"></textarea><br>
+				<div class="radio-group">
+					<input type="radio" name="bannerType" value="standard">
+					<label for="standard">Standard</label><br>
+					<input type="radio" name="bannerType" value="shadow">
+					<label for="shadow">Shadow</label><br>
+					<input type="radio" name="bannerType" value="thinkertoy">
+					<label for="thinkertoy">Thinkertoy</label><br>
+				</div>
+			</div>
 			<br>
-			<button type="submit">Generate Ascii</button>
+			<div class="Button">
+				<button type="submit">Generate Ascii</button>
+			</div>
+		</form>
 	</body>
 </html>
 {{end}}
