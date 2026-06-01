@@ -38,6 +38,7 @@ body {
     margin: 0;
     font-size: 2rem;
     color: var(--primary-color);
+    text-transform: uppercase;
 }
 
 form {
@@ -90,13 +91,14 @@ textarea:focus {
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    /* gap: 1.5rem; */
     flex-wrap: wrap;
 }
 
 .radio-group label {
     cursor: pointer;
     font-weight: 500;
+    padding-right: 2rem;
 }
 
 .Button button {
@@ -109,16 +111,12 @@ textarea:focus {
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .Button button:hover { 
     background: var(--primary-hover); 
 }
 
-.Button button:active { 
-    transform: scale(0.97); 
-}
 
 /* Media Queries */
 @media screen and (max-width: 600px) {

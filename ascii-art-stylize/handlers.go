@@ -10,7 +10,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	files := []string{
 		"./templates/index.html",
-		"./templates/ascii.css",
+		"./templates/index.css",
 	}
 
 	ts, err := template.ParseFiles(files...)
