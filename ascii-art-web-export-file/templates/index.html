@@ -1,0 +1,29 @@
+{{define "index"}}
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Home: Ascii-Art-Web</title>
+	</head>
+	<body>
+		<h1>Welcome to Ascii Art Web</h1>
+        <br />
+        <br />
+		<form action="/download" method="post">
+			<label for="textInput">Input</label>
+			<textarea name="textInput" id="textInput"></textarea><br>
+			<input type="radio" name="bannerType" value="standard">
+			<label for="standard">Standard</label><br>
+			<input type="radio" name="bannerType" value="shadow">
+			<label for="shadow">Shadow</label><br>
+			<input type="radio" name="bannerType" value="thinkertoy">
+			<label for="thinkertoy">Thinkertoy</label><br>
+			<br>
+			<button type="submit">Download Ascii-Art</button>
+	</body>
+</html>
+{{end}}
