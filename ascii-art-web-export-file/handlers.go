@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func Home(w http.ResponseWriter, r *http.Request) {
 
 	files := []string{
 		"./templates/index.html",
@@ -25,20 +25,22 @@ func home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 		http.NotFound(w, r)
+		return
 	}
 }
 
-func displayArt(w http.ResponseWriter, r *http.Request) {
+func DisplayArt(w http.ResponseWriter, r *http.Request) {
 
 	sentence := r.FormValue("textInput")
 	banner := r.FormValue("bannerType")
-	// fmt.Printf("Raw received string: %q\n", sentence)
+
 	// 1. Check for missing data
 	if sentence == "" {
 		http.Error(w, "400 Bad Request - Invalid Input", http.StatusBadRequest)
+		return
 	}
 
-	// 2. Validationm of the banner type
+	// 2. Validation of the banner type
 	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" || banner == "" {
 		http.Error(w, "400 Bad Request - Invalid Banner", http.StatusBadRequest)
 		return
@@ -53,10 +55,20 @@ func displayArt(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	log.Print(banner)
-	result := Runner(sentence, banner)
+	log.Print(banner) // log banner selected
+	result, err := Runner(sentence, banner)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		log.Println(err.Error())
+		return
+	}
 
-	tmpl, err := template.ParseFiles("./templates/ascii.html")
+	files := []string{
+		"./templates/ascii.html",
+		"./templates/ascii.css",
+	}
+
+	tmpl, err := template.ParseFiles(files...)
 
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -69,10 +81,10 @@ func displayArt(w http.ResponseWriter, r *http.Request) {
 		Result: result,
 	}
 
-	tmpl.Execute(w, data)
+	tmpl.ExecuteTemplate(w, "ascii", data)
 }
 
-func downloadArt(w http.ResponseWriter, r *http.Request) {
+func DownloadArt(w http.ResponseWriter, r *http.Request) {
 
 	sentence := r.FormValue("textInput")
 	banner := r.FormValue("bannerType")
@@ -97,9 +109,11 @@ func downloadArt(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	log.Print(banner)
-	result := Runner(sentence, banner)
+	result, err := Runner(sentence, banner)
 
-	
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	}
 
 
 	fileName := "art.txt"
