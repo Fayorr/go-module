@@ -14,9 +14,11 @@
     <main class="grid-container">
         {{range .}}
             <div class="artist--container">
-                <img src="{{.Artist.IMAGE}}" alt="{{.Artist.NAME}} image">
-                <h3>{{.Artist.NAME}}</h3>
-                <p>Est. {{.Artist.CREATIONDATE}}</p>
+                <a href="/artist/{{.Artist.ID}}">
+                    <img src="{{.Artist.IMAGE}}" alt="{{.Artist.NAME}} image">
+                    <h3>{{.Artist.NAME}}</h3>
+                    <p>Est. {{.Artist.CREATIONDATE}}</p>
+                </a>
             </div>
         {{else}}
             <p class="empty-state">No items found.</p>

@@ -1,92 +1,96 @@
 /* --- Global Styles --- */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    padding: 2rem;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f4f7f6;
+	color: #333;
+	padding: 2rem;
 }
 
 /* --- Typography --- */
 .title {
-    text-align: center; /* Centers the title */
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+	text-align: center; /* Centers the title */
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+	color: #2c3e50;
+	text-transform: uppercase;
+	letter-spacing: 2px;
 }
 
 /* --- Grid Layout --- */
 .grid-container {
-    display: grid;
-    /* Forces exactly 4 columns of equal width */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 2rem; /* Space between the tiles */
-    max-width: 1200px; /* Prevents the grid from stretching too wide on massive monitors */
-    margin: 0 auto; /* Centers the grid container itself */
+	display: grid;
+	/* Forces exactly 4 columns of equal width */
+	grid-template-columns: repeat(4, 1fr);
+	gap: 2rem; /* Space between the tiles */
+	max-width: 1200px; /* Prevents the grid from stretching too wide on massive monitors */
+	margin: 0 auto; /* Centers the grid container itself */
 }
 
 /* --- Card/Tile Styles --- */
 .artist--container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+	background-color: #ffffff;
+	border-radius: 12px;
+	padding: 1.5rem;
+	text-align: center;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+.artist--container a {
+    text-decoration: none;
 }
 
 /* Adds a nice "lift" effect when a user hovers over a card */
 .artist--container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	transform: translateY(-5px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .artist--container img {
-    width: 100%; /* Makes the image fill the card width */
-    max-width: 200px;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    object-fit: cover;
+	width: 100%;
+	max-width: 200px;
+	height: auto;
+	border-radius: 8px;
+	margin-bottom: 1rem;
+	object-fit: cover;
 }
 
 .artist--container h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
+	font-size: 1.25rem;
+	margin-bottom: 0.5rem;
+	color: #2c3e50;
 }
 
 .artist--container p {
-    font-size: 0.9rem;
-    color: #7f8c8d;
+	font-size: 0.9rem;
+	color: #7f8c8d;
 }
 
 /* --- Empty State --- */
 .empty-state {
-    grid-column: 1 / -1; /* Makes the empty message span across all 4 columns */
-    text-align: center;
-    font-size: 1.2rem;
-    color: #95a5a6;
+	grid-column: 1 / -1; /* Makes the empty message span across all 4 columns */
+	text-align: center;
+	font-size: 1.2rem;
+	color: #95a5a6;
 }
 
 /* --- Responsive Design (Optional but highly recommended) --- */
 /* Changes to 2 columns on tablets */
 @media (max-width: 900px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+	.grid-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 /* Changes to 1 column on mobile phones */
 @media (max-width: 600px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
+	.grid-container {
+		grid-template-columns: 1fr;
+	}
 }

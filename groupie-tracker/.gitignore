@@ -1,0 +1,10 @@
+.air.toml
+*.air.toml
+/tmp
+*tmp
+tmp
+.log
+*.log
+
+.env
+go.sum
