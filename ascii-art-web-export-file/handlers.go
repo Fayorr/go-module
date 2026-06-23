@@ -86,40 +86,12 @@ func DisplayArt(w http.ResponseWriter, r *http.Request) {
 
 func DownloadArt(w http.ResponseWriter, r *http.Request) {
 
-	sentence := r.FormValue("textInput")
-	banner := r.FormValue("bannerType")
-	// 1. Check for missing data
-	if sentence == "" {
-		http.Error(w, "400 Bad Request - Invalid Input", http.StatusBadRequest)
-	}
-
-	// 2. Validationm of the banner type
-	if banner != "standard" && banner != "shadow" && banner != "thinkertoy" || banner == "" {
-		http.Error(w, "400 Bad Request - Invalid Banner", http.StatusBadRequest)
-		return
-	}
-
-	// 3. Loop through every individual character in the sentence
-	for _, char := range sentence {
-		// If the character is NOT a newline (10) AND NOT a carriage return (13)
-		// AND it falls outside the standard 32-126 range...
-		if char != '\n' && char != '\r' && (char < 32 || char > 126) {
-			http.Error(w, "400 Bad Request - Non-ASCII Character Detected", http.StatusBadRequest)
-			return
-		}
-	}
-	log.Print(banner)
-	result, err := Runner(sentence, banner)
-
-	if err != nil {
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-	}
-
+	result := r.FormValue("ascii-data")
 
 	fileName := "art.txt"
 	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileName))
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	w.Header().Set("Content-Length", strconv.Itoa(len(result)))
+	w.Header().Set("Content-Length", strconv.Itoa(len(result))) // download speed for browser
 
 	w.Write([]byte(result))
 }

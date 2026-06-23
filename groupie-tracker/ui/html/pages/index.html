@@ -4,16 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../../static/img/icons8-dice-32.png">
+    <link rel="stylesheet" href="../../static/css/home.css">
     <title>Home - Groupie Tracker</title>
 </head>
 <body>
-    <h1>Hi</h1>
-  <!-- Card Component -->
-    {{range .}}
-        <div>{{.Artist.NAME}}</div>
-    {{else}}
-        <p>No items found.</p>
-    {{end}}
+    <h1 class="title">Groupie Tracker</h1>
+    
+    <main class="grid-container">
+        {{range .}}
+            <div class="artist--container">
+                <img src="{{.Artist.IMAGE}}" alt="{{.Artist.NAME}} image">
+                <h3>{{.Artist.NAME}}</h3>
+                <p>Est. {{.Artist.CREATIONDATE}}</p>
+            </div>
+        {{else}}
+            <p class="empty-state">No items found.</p>
+        {{end}}
+    </main>
 </body>
 </html>
 {{end}}

@@ -23,6 +23,19 @@
 			<h1>Result</h1>
 			<pre>{{.Result}}</pre>
 			<a href="/"><button type="button">Return to Home</button></a>
+			{{if .Result}}
+			<form
+				action="/download"
+				method="post"
+			>
+				<input
+					type="hidden"
+					name="ascii-data"
+					value="{{.Result}}"
+				/>
+				<button type="submit">Download Ascii-Art</button>
+			</form>
+			{{end}}
 		</div>
 	</body>
 </html>

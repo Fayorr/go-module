@@ -7,7 +7,6 @@ type Artist struct{
 	MEMBERS []string `json:"members"`
 	CREATIONDATE int `json:"creationDate"`
 	FIRSTALBUM string `json:"firstAlbum"`
-    //  "relations": "https://groupietrackers.herokuapp.com/api/relation/1"
 }
 type Locations struct{
 	ID int `json:"id"`

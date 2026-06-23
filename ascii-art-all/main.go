@@ -19,10 +19,16 @@ EX: go run . --output=<fileName.txt> something standard`)
 	var banner string
 	var fileName string
 
-
 	if len(arguments) == 1 {
 		input = arguments[0]
 		banner = "standard"
+
+		result, err := Runner(input, banner)
+	if err != nil {
+		fmt.Println("error gnerating ascii")
+		return
+	}
+	fmt.Print(result)
 	}
 	if len(arguments) == 2 {
 		if arguments[1] != "standard" && arguments[1] != "shadow" && arguments[1] != "thinkertoy" {
@@ -33,6 +39,13 @@ EX: go run . something standard`)
 		}
 		input = arguments[0]
 		banner = arguments[1]
+		result, err := Runner(input, banner)
+	if err != nil {
+		fmt.Println("error gnerating ascii")
+		return
+	}
+	fmt.Print(result)
+
 	}
 	if len(arguments) == 3 {
 		if arguments[0] == "" {
@@ -44,16 +57,22 @@ EX: go run . --output=<fileName.txt> something standard`)
 		if strings.HasPrefix(arguments[0], "--output=") {
 			fileName = strings.TrimPrefix(arguments[0], "--output=")
 		}
+		
 		input = arguments[1]
 		banner = arguments[2]
+		result, err := Runner(input, banner)
+	if err != nil {
+		fmt.Println("error gnerating ascii")
+		return
+	}
+	// fmt.Print(result)
+	if fileName != "" {
+		os.WriteFile(fileName, []byte(result), 0644)
+	}
 	}
 	if len(arguments) == 4 {
 		input = arguments[0]
 	}
-	result := Runner(input, banner)
-
-	if fileName != "" {
-		os.WriteFile(fileName, []byte(result), 0644)
-	}
 	
+
 }

@@ -4,48 +4,43 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"ascii-art-justify/internal"
 )
 
-func Runner(sentence, banner string) string {
-
-	var bannerFile string 
-	switch banner {
-	case "shadow":
-		bannerFile = "./banner/shadow.txt"
-	case "thinkertoy":
-		bannerFile = "./banner/thinkertoy.txt"
-	case "standard":
-		bannerFile = "./banner/standard.txt"
-	default:
-		bannerFile = ""
-	}
-
-	// Read the banner file containing ASCII art character definitions
-	result, err := os.ReadFile(bannerFile)
-
+// Run processes the parsed arguments and prints the aligned ASCII art
+func Run(align, text, bannerType string) {
+	bannerPath := "banner/" + bannerType + ".txt"
+	
+	banner, err := internal.LoadBanner(bannerPath)
 	if err != nil {
-		fmt.Printf("Error reading file: %s", err)
+		fmt.Printf("Error: %v\n", err)
 		os.Exit(1)
 	}
 
-	trimmedResult := strings.Split(string(result), "\n")
+	termWidth := internal.GetTermWidth()
 
-	wordSlice := strings.Split(sentence, "\n")
-
-	var finalString strings.Builder
-	for j := 0; j < len(wordSlice); j++ {
-		if wordSlice[j] == "" {
-			finalString.WriteRune('\n')
-			continue
-		}
-
-		for i := 0; i < 8; i++ {
-			for _, ch := range wordSlice[j] {
-				pos := (int(ch-' ') * 9)
-				finalString.WriteString(trimmedResult[pos+i])
-			}
-			finalString.WriteRune('\n')
+	parts := strings.Split(text, "\\n")
+	allEmpty := true
+	for _, p := range parts {
+		if p != "" {
+			allEmpty = false
+			break
 		}
 	}
-	return finalString.String()
+
+	if allEmpty {
+		for i := 0; i < len(parts)-1; i++ {
+			fmt.Println()
+		}
+		return
+	}
+
+	for _, part := range parts {
+		if part == "" {
+			fmt.Println()
+			continue
+		}
+		internal.AlignAndPrint(part, banner, align, termWidth)
+	}
 }

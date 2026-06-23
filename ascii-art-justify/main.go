@@ -1,74 +1,62 @@
 package main
 
 import (
-	"ascii-art-justify/internal"
 	"fmt"
 	"os"
-	"os/exec"
-	"strconv"
 	"strings"
 )
 
-func validator(arguments []string) bool {
-	// Check for exactly 3 arguments
-	if len(arguments) != 3 {
-		fmt.Println("need 3 arguments")
-		return false
-	}
-
-	flag := arguments[0]
-	if !strings.HasPrefix(flag, "--align=") {
-		fmt.Println("needs the appropraite prefix")
-		return false
-	}
-	return true
+func printUsage() {
+	fmt.Print("Usage: go run . [OPTION] [STRING] [BANNER]\n\nExample: go run . --align=right something standard\n")
 }
-
-func GetTerminalWidth() int {
-   widthCmd := exec.Command("stty", "size")
-    widthCmd.Stdin = os.Stdin 
-    
-    res, err := widthCmd.Output()
-    if err != nil {
-		fmt.Println("Can't find width output returning fallback width")
-        return 80 
-    }
-	parts := strings.Fields(string(res))
-	if len(parts) < 2 {
-		return 80
-	}
-    width, err := strconv.Atoi(string(parts[1])) 
-    if err != nil {
-			fmt.Println("Can't convert width to int, returning fallback width")
-        return 80 
-    }
-    return width
-}
-
 
 func main() {
-	// arguments := os.Args[1:]
+	args := os.Args[1:]
+	if len(args) == 0 {
+		return
+	}
 
-	// if !validator(arguments) {
-	// 	return
-	// }
+	var align string
+	var nonFlagArgs []string
 
-	// flag := arguments[0]
-	// sentence := arguments[1]
-	// banner := arguments[2]
+	for _, arg := range args {
+		if strings.HasPrefix(arg, "--align=") {
+			if align != "" {
+				printUsage()
+				os.Exit(0)
+			}
+			align = strings.TrimPrefix(arg, "--align=")
+			if align != "center" && align != "left" && align != "right" && align != "justify" {
+				printUsage()
+				os.Exit(0)
+			}
+		} else if strings.HasPrefix(arg, "-") {
+			printUsage()
+			os.Exit(0)
+		} else {
+			nonFlagArgs = append(nonFlagArgs, arg)
+		}
+	}
 
-	// // Parse the alignment from the --align= flag
-	// alignment := strings.TrimPrefix(flag, "--align=")
+	if align == "" {
+		align = "left"
+	}
 
-	// // Convert escaped newlines (\\n) to actual newlines for multi-line input
-	// finalSen := strings.ReplaceAll(sentence, "\\n", "\n")
+	var text, bannerType string
+	if len(nonFlagArgs) == 1 {
+		text = nonFlagArgs[0]
+		bannerType = "standard"
+	} else if len(nonFlagArgs) == 2 {
+		text = nonFlagArgs[0]
+		bannerType = nonFlagArgs[1]
+	} else {
+		printUsage()
+		os.Exit(0)
+	}
 
-	// // Generate ASCII art using the Runner function
-	// result := Runner(finalSen, banner)
+	if text == "" {
+		return
+	}
 
-	// // Convert string result to bytes and write to output file
-	// fmt.Print(result)
-	
-	width := getTerminalWidth()
-	internal.CalculatePadding(width int, side string, )
+	Run(align, text, bannerType)
 }
