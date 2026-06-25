@@ -1,38 +1,64 @@
 {{define "artist"}}
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<link
-			rel="icon"
-			type="image/x-icon"
-			href="../../static/img/icons8-dice-32.png"
-		/>
-		<link
-			rel="stylesheet"
-			href="../../static/css/home.css"
-		/>
-		<title>{{.Artist.NAME}}</title>
-	</head>
-	<body>
-        <section class="hero--section">
-            <img src="" alt="" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="../../static/img/icons8-dice-32.png" />
+        <link rel="stylesheet" href="../../static/css/home.css" />
+        <link rel="stylesheet" href="../../static/css/artist.css" />
+        <title>{{.Artist.NAME}} - Groupie Tracker</title>
+    </head>
+    <body>
+        <div class="page-container">
+            <a href="/" class="back-link">&larr; Back to Home</a>
+            
+            <section class="hero--section">
+                <div class="hero-image-wrapper">
+                    <img src="{{.Artist.IMAGE}}" alt="{{.Artist.NAME}} image" />
+                </div>
+                <div class="hero-details">
+                    <h1 class="artist-title">{{.Artist.NAME}}</h1>
+                    <p class="meta-info"><strong>Established:</strong> {{.Artist.CREATIONDATE}}</p>
+                    <p class="meta-info"><strong>First Album:</strong> {{.Artist.FIRSTALBUM}}</p>
+                    
+                    <div class="members-container">
+                        <h3>Members</h3>
+                        <ul class="tag-list">
+                            {{range .Artist.MEMBERS}}
+                                <li>{{.}}</li>
+                            {{else}}
+                                <li>No members listed.</li>
+                            {{end}}
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-        </section>
-
-
-        <!-- Concert Date Section -->
-         <section class="concert--section">
-
-         </section>
+            <div class="info-grid">
+                <section class="concert--section card">
+                    <h2>Concert Dates</h2>
+                    <ul class="data-list">
+                        {{range .ConcertDates.DATES}}
+                            <li>{{.}}</li>
+                        {{else}}
+                            <li class="empty-text">No upcoming dates.</li>
+                        {{end}}
+                    </ul>
+                </section>
         
-        <!-- Location Section -->
-         <section class="location--section">
-
+                <section class="location--section card">
+                    <h2>Locations</h2>
+                    <ul class="data-list">
+                        {{range .Locations.LOCATIONS}}
+                            <li>{{.}}</li>
+                        {{else}}
+                            <li class="empty-text">No locations found.</li>
+                        {{end}}
+                    </ul>
+                </section>
+            </div>
+        </div>
     </body>
 </html>
 {{end}}
