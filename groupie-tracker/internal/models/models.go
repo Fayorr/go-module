@@ -18,11 +18,7 @@ type ConcertDates struct{
 }
 type Relations struct{
 	ID int `json:"id"`
-	IMAGE string `json:"image"`
-	NAME string `json:"name"`
-	MEMBERS []string `json:"members"`
-	CREATIONDATE int `json:"creationDate"`
-	FIRSTALBUM string `json:"firstAlbum"`
+	DATESLOCATION map[string][]string `json:"datesLocations"`
 
 }
 type LocationsWrapper struct {

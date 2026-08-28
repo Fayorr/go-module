@@ -1,94 +1,123 @@
-/* --- Global Styles --- */
+/* --- Base Styling & Color Palette --- */
 * {
 	box-sizing: border-box;
+}
+
+body {
+	background-color: #fcfaf2; /* Soft off-white background from artist.css */
+	font-family:
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	color: #1a1a1a;
 	margin: 0;
 	padding: 0;
 }
 
-body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	background-color: #f4f7f6;
-	color: #333;
+.page-container {
+	max-width: 1200px;
+	margin: 0 auto;
 	padding: 2rem;
 }
 
 /* --- Typography --- */
 .title {
-	text-align: center; /* Centers the title */
+	text-align: center;
+	font-family: 'Georgia', serif; /* Matching editorial serif font */
 	font-size: 2.5rem;
-	margin-bottom: 2rem;
-	color: #2c3e50;
-	text-transform: uppercase;
-	letter-spacing: 2px;
+	font-weight: bold;
+	margin-top: 1rem;
+	margin-bottom: 3rem;
+	color: #1a1a1a;
+	letter-spacing: normal; /* Removed aggressive uppercase spacing */
+	text-transform: none;
 }
 
 /* --- Grid Layout --- */
 .grid-container {
 	display: grid;
-	/* Forces exactly 4 columns of equal width */
+	/* Clean, structured box-grid matching the meta-grid look */
 	grid-template-columns: repeat(4, 1fr);
-	gap: 2rem; /* Space between the tiles */
-	max-width: 1200px; /* Prevents the grid from stretching too wide on massive monitors */
-	margin: 0 auto; /* Centers the grid container itself */
+	max-width: 1200px;
+	margin: 0 auto;
+	gap: 3rem;
 }
 
 /* --- Card/Tile Styles --- */
 .artist--container {
-	background-color: #ffffff;
-	border-radius: 12px;
-	padding: 1.5rem;
+	background-color: #fff;
+	/* Clean borders instead of soft border-radii and shadows */
+	border-right: 1px solid #e6e4dc;
+	border-bottom: 1px solid #e6e4dc;
+	padding: 2rem 1.5rem;
 	text-align: center;
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease;
-}
-.artist--container a {
-    text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-decoration: none; /* Inherited style cleanup if wrapper is an anchor */
+	cursor: pointer;
+	border: 1px solid transparent;
 }
 
-/* Adds a nice "lift" effect when a user hovers over a card */
+.artist--container a {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	width: 100%;
+}
+
+/* Subtle flat highlight instead of a 'floating lift' effect */
 .artist--container:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	border: 1px solid black;
 }
 
 .artist--container img {
 	width: 100%;
 	max-width: 200px;
-	height: auto;
-	border-radius: 8px;
-	margin-bottom: 1rem;
-	object-fit: cover;
+	height: 200px; /* Uniform square scaling matching hero wrappers */
+	object-fit: contain;
+	background-color: #fff;
+	border: 1px solid #e6e4dc;
+	margin-bottom: 1.5rem;
 }
 
 .artist--container h3 {
+	font-family: 'Georgia', serif; /* Styled exactly like .location-name */
 	font-size: 1.25rem;
-	margin-bottom: 0.5rem;
-	color: #2c3e50;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin: 0 0 0.5rem 0;
 }
 
 .artist--container p {
 	font-size: 0.9rem;
-	color: #7f8c8d;
+	font-weight: 400;
+	color: #777672; /* Softer text color from .country-text */
+	margin: 0;
 }
 
 /* --- Empty State --- */
 .empty-state {
-	grid-column: 1 / -1; /* Makes the empty message span across all 4 columns */
+	grid-column: 1 / -1;
 	text-align: center;
-	font-size: 1.2rem;
-	color: #95a5a6;
+	padding: 4rem 2rem;
+	font-family: 'Georgia', serif;
+	font-style: italic;
+	color: #777;
+	border-right: 1px solid #e6e4dc;
+	border-bottom: 1px solid #e6e4dc;
 }
 
-/* --- Responsive Design (Optional but highly recommended) --- */
-/* Changes to 2 columns on tablets */
+/* --- Responsive Layout Breaks --- */
 @media (max-width: 900px) {
 	.grid-container {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+	.title {
+		font-size: 2rem;
+		margin-bottom: 2rem;
+	}
 }
 
-/* Changes to 1 column on mobile phones */
 @media (max-width: 600px) {
 	.grid-container {
 		grid-template-columns: 1fr;
